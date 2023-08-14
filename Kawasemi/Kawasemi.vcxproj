@@ -192,14 +192,15 @@
     <Font Include="Fonts\Vox_Semibold_Italic.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Shaders\Simple.vs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shaders\Simple.fs" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="Textures\Snow.bmp" />
     <Image Include="Textures\TexKawasemi.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\ShadowPoint.fragment" />
+    <None Include="Shaders\ShadowPoint.geometry" />
+    <None Include="Shaders\ShadowPoint.vertex" />
+    <None Include="Shaders\Simple.fragment" />
+    <None Include="Shaders\Simple.vertex" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

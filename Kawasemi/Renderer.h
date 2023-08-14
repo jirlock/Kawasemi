@@ -13,6 +13,8 @@ public:
 	Renderer(class Game* game);
 	void Initialize();
 	void CompileShaders();
+    void PrepareShadowFBO();
+    void DrawShadow();
 	void Draw();
 	void AddPointlight(class PointlightComponent* light) { mPointlights.push_back(light); }
 	//void RemovePointlight(class PointlightComponent* light);
@@ -23,11 +25,16 @@ private:
 	class Game* mGame;
 	GLFWwindow* mWindow;
 	class CameraActor* mCamera;
+    class Shader* mShadowShaderPoint;
 	class Shader* mSceneShader;
     GLuint mTmpVertexArray;
 	std::vector<class MeshComponent*> mMeshes;
 	std::vector<class PointlightComponent*> mPointlights;
 	std::vector<class SpotlightComponent*> mSpotlights;
+
+    GLuint mShadowFBOPoint;
+    GLuint mShadowTexturePoint;
+    GLuint mShadowResolutionPoint;
 
 	glm::vec4 mClearColor;
 };

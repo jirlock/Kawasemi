@@ -78,12 +78,12 @@ void Game::LoadScene()
     MeshComponent* MeshCompFloor = new MeshComponent(AFloor, MeshFloor, MaterialFloor);
 
     Actor* APointlight0 = new Actor(this, "Pointlight0");
-    PointlightComponent* PointComp0 = new PointlightComponent(APointlight0, 10.0f, glm::vec3(1.0f, 1.0f, 1.0f));
-    APointlight0->SetPosition(glm::vec3(-4.0f, 3.0f, 3.0f));
+    PointlightComponent* PointComp0 = new PointlightComponent(APointlight0, 30.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+    APointlight0->SetPosition(glm::vec3(-4.0f, 5.0f, 3.0f));
 
     Actor* APointlight1 = new Actor(this, "Pointlight1");
-    PointlightComponent* PointComp1 = new PointlightComponent(APointlight1, 10.0f, glm::vec3(1.0f, 1.0f, 1.0f));
-    APointlight1->SetPosition(glm::vec3(3.0f, 3.0f, 5.0f));
+    PointlightComponent* PointComp1 = new PointlightComponent(APointlight1, 30.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+    APointlight1->SetPosition(glm::vec3(3.0f, 5.0f, 5.0f));
 
     Actor* APointlight2 = new Actor(this, "Pointlight2");
     PointlightComponent* PointComp2 = new PointlightComponent(APointlight2, 10.0f, glm::vec3(1.0f, 1.0f, 1.0f));
@@ -91,6 +91,7 @@ void Game::LoadScene()
 
     //Need to Compile Shaders After Loading the Scene.
     mRenderer->CompileShaders();
+    mRenderer->PrepareShadowFBO();
 }
 
 
@@ -144,6 +145,7 @@ void Game::UpdateGame()
 
 void Game::GenerateOutput()
 {
+    mRenderer->DrawShadow();
     mRenderer->Draw();
     mGui->Draw();
 

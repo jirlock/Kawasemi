@@ -5,6 +5,7 @@ Component::Component(Actor* actor, int updateOrder)
 	: mOwner(actor)
 	, mWindow(mOwner->GetWindow())
 {
+    mOwner->AddComponent(this);
 }
 
 Component::~Component()

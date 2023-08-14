@@ -162,21 +162,28 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Shaders\Simple.vs">
-      <Filter>リソース ファイル\Shaders</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shaders\Simple.fs">
-      <Filter>リソース ファイル\Shaders</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="Textures\Snow.bmp">
       <Filter>リソース ファイル\Textures</Filter>
     </Image>
     <Image Include="Textures\TexKawasemi.bmp">
       <Filter>リソース ファイル\Textures</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Simple.fragment">
+      <Filter>リソース ファイル\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Simple.vertex">
+      <Filter>リソース ファイル\Shaders</Filter>
+    </None>
+    <None Include="Shaders\ShadowPoint.fragment">
+      <Filter>リソース ファイル\Shaders</Filter>
+    </None>
+    <None Include="Shaders\ShadowPoint.geometry">
+      <Filter>リソース ファイル\Shaders</Filter>
+    </None>
+    <None Include="Shaders\ShadowPoint.vertex">
+      <Filter>リソース ファイル\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

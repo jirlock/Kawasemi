@@ -1,0 +1,15 @@
+#version 410 core
+
+in vec4 frag_pos;
+in float id_float;
+
+uniform vec3 light_pos[NUMVERTICES];
+uniform float far_plane[NUMVERTICES];
+
+void main()
+{
+    int id = int(floor((id_float+0.01)/6.0));
+    float light_dist = distance(frag_pos.xyz, light_pos[id]);
+    light_dist = light_dist / far_plane[id];
+    gl_FragDepth = light_dist;
+}

@@ -70,6 +70,7 @@ void Actor::AddComponent(Component* component)
 			break;
 		}
 	}
+    mComponents.insert(iter, component);
 }
 
 void Actor::RemoveComponent(Component* component)
