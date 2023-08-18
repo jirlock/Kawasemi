@@ -8,15 +8,23 @@
 class Component
 { 
 public:
-	Component(class Actor* owner, int updateOrder=100);
+    enum CompType
+    {
+        TMesh,
+        TPointlight,
+        TNormal
+    };
+	Component(class Actor* owner, CompType type, int updateOrder=100);
 	virtual ~Component();
 	virtual void Update(float deltaTime);
 	virtual void ProcessInput();
 
+    CompType GetType() { return mType; }
 	int GetUpdateOrder() const { return mUpdateOrder; }
 	class Actor* GetOwner() { return mOwner; }
 
 protected:
+    CompType mType;
 	class Actor* mOwner;
 	int mUpdateOrder;
 	GLFWwindow* mWindow;

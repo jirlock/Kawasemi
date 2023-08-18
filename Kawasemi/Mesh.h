@@ -14,13 +14,19 @@
 class Mesh
 {
 public:
-	Mesh(const char* path, bool smooth = true);
+	Mesh(std::string path, bool smooth = true);
 	GLuint GetVertexbuffer() { return mVertexbuffer; }
 	GLuint GetNormalbuffer() { return mNormalbuffer; }
 	GLuint GetUvbuffer() { return mUvbuffer; }
 	GLuint GetNumOfVertices() { return mNumOfVertices; }
 
+    std::string GetPath() { return mPath; }
+    bool GetSmooth() { return mSmooth; }
+
 private:
+    std::string mPath;
+    bool mSmooth;
+
 	std::vector<glm::vec3> mVertices;
 	std::vector<glm::vec3> mNormals;
 	std::vector<glm::vec2> mUvs;

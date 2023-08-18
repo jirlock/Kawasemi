@@ -1,10 +1,12 @@
 #include "Actor.h"
 #include "Game.h"
 #include "Component.h"
+#include "MeshComponent.h"
+#include "LightComponent.h"
 
 
 
-Actor::Actor(Game* game, const char* name)
+Actor::Actor(Game* game, std::string name)
 	: mName(name)
 	, mState(EActive)
 	, mPosition(glm::vec3(0.0f, 0.0f, 0.0f))
@@ -19,7 +21,12 @@ Actor::Actor(Game* game, const char* name)
 
 Actor::~Actor()
 {
+    mGame->RemoveActor(this);
 
+    while (!mComponents.empty())
+    {
+        delete mComponents.back();
+    }
 }
 
 void Actor::ProcessInput()
@@ -77,9 +84,31 @@ void Actor::RemoveComponent(Component* component)
 {
 	auto iter = std::find(mComponents.begin(), mComponents.end(), component);
 	if (iter != mComponents.end())
-	{
 		mComponents.erase(iter);
-	}
+}
+
+void Actor::AddPointlightComponent(PointlightComponent* component)
+{
+    mPointlights.push_back(component);
+}
+
+void Actor::RemovePointlightComponent(PointlightComponent* component)
+{
+    auto iter = std::find(mPointlights.begin(), mPointlights.end(), component);
+    if (iter != mPointlights.end())
+        mPointlights.erase(iter);
+}
+
+void Actor::AddMeshComponent(MeshComponent* component)
+{
+    mMeshes.push_back(component);
+}
+
+void Actor::RemoveMeshComponent(MeshComponent* component)
+{
+    auto iter = std::find(mMeshes.begin(), mMeshes.end(), component);
+    if (iter != mMeshes.end())
+        mMeshes.erase(iter);
 }
 
 

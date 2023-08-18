@@ -1,7 +1,7 @@
 #include "Material.h"
 #include "Texture.h"
 
-Material::Material(const char* name, class Texture* texture, glm::vec3 color, bool useTexture)
+Material::Material(std::string name, class Texture* texture, glm::vec3 color, bool useTexture)
 	: mName(name)
 	, mTexture(texture)
 	, mColor(color)

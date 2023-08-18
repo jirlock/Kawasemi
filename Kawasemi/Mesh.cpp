@@ -1,6 +1,8 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const char* path, bool smooth)
+Mesh::Mesh(std::string path, bool smooth)
+    : mPath(path)
+    , mSmooth(smooth)
 {
 	std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
 	std::vector<glm::vec3> temp_vertices;

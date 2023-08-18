@@ -71,11 +71,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:/glad/include;D:/glfw-3.3.8.bin.WIN64/include;D:/glm-master/include;$(IncludePath)</IncludePath>
+    <IncludePath>D:/glad/include;D:/glfw-3.3.8.bin.WIN64/include;D:/glm-master/include;D:/json-develop/include;$(IncludePath)</IncludePath>
     <LibraryPath>D:/glfw-3.3.8.bin.WIN64/lib-vc2022;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:/glad/include;D:/glfw-3.3.8.bin.WIN64/include;D:/glm-master/include;$(IncludePath)</IncludePath>
+    <IncludePath>D:/glad/include;D:/glfw-3.3.8.bin.WIN64/include;D:/glm-master/include;D:/json-develop/include;$(IncludePath)</IncludePath>
     <LibraryPath>D:/glfw-3.3.8.bin.WIN64/lib-vc2022;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -161,9 +161,12 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshComponent.cpp" />
+    <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="VariousComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -184,9 +187,12 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshComponent.h" />
+    <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="VariousComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Fonts\Vox_Semibold_Italic.ttf" />

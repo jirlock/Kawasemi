@@ -1,9 +1,10 @@
 #include "Component.h"
 #include "Actor.h"
 
-Component::Component(Actor* actor, int updateOrder)
-	: mOwner(actor)
-	, mWindow(mOwner->GetWindow())
+Component::Component(Actor* actor, Component::CompType type, int updateOrder)
+    : mOwner(actor)
+    , mWindow(mOwner->GetWindow())
+    , mType(type)
 {
     mOwner->AddComponent(this);
 }

@@ -4,7 +4,7 @@
 #include "Renderer.h"
 
 MeshComponent::MeshComponent(Actor* actor, Mesh* mesh, Material* material, int updateOrder)
-	: Component(actor, updateOrder)
+    : Component(actor, Component::TMesh, updateOrder)
 	, mPosition(glm::vec3(0.0f, 0.0f, 0.0f))
 	, mRotation(glm::vec3(0.0f, 0.0f, 0.0f))
 	, mScale(glm::vec3(1.0f, 1.0f, 1.0f))
@@ -12,6 +12,7 @@ MeshComponent::MeshComponent(Actor* actor, Mesh* mesh, Material* material, int u
 	, mMaterial(material)
 {
 	UpdateMatrices();
+    mOwner->AddMeshComponent(this);
     mOwner->GetGame()->GetRenderer()->AddMesh(this);
 }
 

@@ -18,9 +18,15 @@ public:
 	class Material* GetMaterial() { return mMaterial; }
     glm::mat4 GetRotationMatrix();
 	glm::mat4 GetModelMatrix();
+    glm::vec3 GetPosition() { return mPosition; }
+    glm::vec3 GetRotation() { return mRotation; }
+    glm::vec3 GetScale() { return mScale; }
 
 	void SetMesh(class Mesh* mesh) { mMesh = mesh; }
 	void SetMaterial(class Material* material) { mMaterial = material; }
+    void SetPosition(glm::vec3 position) { mPosition = position; }
+    void SetRotation(glm::vec3 rotation) { mRotation = rotation; }
+    void SetScale(glm::vec3 scale) { mScale = scale; }
 
 private:
 	void UpdateMatrices();

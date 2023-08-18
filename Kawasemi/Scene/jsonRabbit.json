@@ -1,0 +1,19 @@
+{
+	"name": "JsonRabbit",
+	"position": [2.0, 0.0, 0.0],
+	"Components": {
+		"MeshComponent": {
+			"Mesh": {
+				"path": "Meshes/stanfordBunny.obj",
+				"smooth": true
+			},
+			"Material": {
+				"name": "MatJsonRabbit",
+				"Texture": "Textures/Snow.bmp",
+				"color": [0.3, 0.6, 0.5],
+				"useTexture": false
+			}
+		}
+	}
+}
+				

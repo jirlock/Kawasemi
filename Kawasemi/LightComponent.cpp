@@ -3,14 +3,15 @@
 #include "Actor.h"
 #include "Renderer.h"
 
-PointlightComponent::PointlightComponent(Actor* actor, float power, glm::vec3 color, int updateOrder)
-    : Component(actor, updateOrder)
+PointlightComponent::PointlightComponent(Actor* actor, float power, glm::vec3 position, glm::vec3 color, int updateOrder)
+    : Component(actor, Component::TPointlight, updateOrder)
     , mPower(power)
-    , mPosition(glm::vec3(0.0f, 0.0f, 0.0f))
+    , mPosition(position)
     , mColor(color)
     , mNear(0.5f)
     , mFar(50.0f)
 {
+    mOwner->AddPointlightComponent(this);
     mOwner->GetGame()->GetRenderer()->AddPointlight(this);
     UpdateShadowTransforms();
 }
@@ -39,7 +40,5 @@ void PointlightComponent::UpdateShadowTransforms()
     mShadowTransforms.push_back(shadowProj * glm::lookAt(tmpPos, tmpPos + glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f)));
     mShadowTransforms.push_back(shadowProj * glm::lookAt(tmpPos, tmpPos + glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, -1.0f, 0.0f)));
     mShadowTransforms.push_back(shadowProj * glm::lookAt(tmpPos, tmpPos + glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, -1.0f, 0.0f)));
-
-    std::cout << mShadowTransforms.size() << std::endl;
 }
 

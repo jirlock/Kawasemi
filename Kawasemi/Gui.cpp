@@ -3,6 +3,11 @@
 #include "Game.h"
 #include "Actor.h"
 #include "CameraActor.h"
+#include "Component.h"
+#include "MeshComponent.h"
+#include "Mesh.h"
+#include "Material.h"
+#include "LightComponent.h"
 
 Gui::Gui(Game* game, GLFWwindow* window)
 	: mGame(game)
@@ -76,11 +81,20 @@ void Gui::DrawTopbar()
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
 
 	{
-		ImGui::Begin("TOPBAR", &mTopbarOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
+        ImGui::Begin("TOPBAR", &mTopbarOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
 		ImGui::SetCursorPos(ImVec2(10, 4));
 		ImGui::PushFont(mFontVox20);
 		ImGui::Text("KAWASEMI");
 		ImGui::PopFont();
+
+        ImGui::SameLine();
+        if (ImGui::Button("Save"))
+            mGame->SaveScene("Scene/tmpScene.json");
+
+        ImGui::SameLine();
+        if (ImGui::Button("AddRabbit"))
+            mGame->AddRabbit();
+
 		ImGui::End();
 	}
 
@@ -100,6 +114,9 @@ void Gui::DrawSidebar()
 		ImGui::Begin("SIDEBAR", &mSidebarOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
 
 		ImGui::PushFont(mFontVox20);
+
+
+        /*
 		ImGui::SeparatorText("Camera");
 
         ImGui::Text("Camera Position");
@@ -113,16 +130,18 @@ void Gui::DrawSidebar()
         glm::vec3 tmpdir = mGame->GetCamera()->GetDirection();
         cameraDirection = std::to_string(tmpdir.x) + std::string(", ") + std::to_string(tmpdir.y) + std::string(", ") + std::to_string(tmpdir.z);
         ImGui::Text(cameraDirection.c_str());
+        */
 
 
         //
         ImGui::SeparatorText("Actors");
+
         ImGui::BeginListBox("Actors", ImVec2(-FLT_MIN, 5 * ImGui::GetTextLineHeightWithSpacing()));
         std::vector<Actor*> tmpActors = mGame->GetActors();
         for (int i = 0; i < tmpActors.size(); i++)
         {
             const bool is_selected = (i == mActorIndex);
-            if (ImGui::Selectable(tmpActors[i]->GetName(), is_selected))
+            if (ImGui::Selectable(tmpActors[i]->GetName().c_str(), is_selected))
             {
                 mActorIndex = i;
             }
@@ -135,7 +154,7 @@ void Gui::DrawSidebar()
         //
         Actor* selectedActor = tmpActors[mActorIndex];
         ImGui::SeparatorText("Properties");
-        ImGui::Text(selectedActor->GetName());
+        ImGui::Text(selectedActor->GetName().c_str());
 
         if (selectedActor == mGame->GetCamera())
         {
@@ -163,6 +182,11 @@ void Gui::DrawSidebar()
         }
         else
         {
+            //ImGui's Labels work strange.
+
+
+            ImGui::Text("Actor");
+
             //ActorPosition
             glm::vec3 tmpPos = selectedActor->GetPosition();
             ImGui::DragFloat3("Position", &tmpPos[0], 0.05f);
@@ -177,6 +201,53 @@ void Gui::DrawSidebar()
             glm::vec3 tmpSca = selectedActor->GetScale();
             ImGui::DragFloat3("Scale", &tmpSca[0], 0.05, 0.0f, 10.0f);
             selectedActor->SetScale(tmpSca);
+
+            if (selectedActor->GetPointlightComponents().size() != 0)
+            {
+                for (auto comp : selectedActor->GetPointlightComponents())
+                {
+                    ImGui::Text("Pointlight Component");
+
+                    float tmpPow = comp->GetPower();
+                    ImGui::DragFloat("Point Power", &tmpPow, 0.05f, 0.0f, 1000.0f);
+                    comp->SetPower(tmpPow);
+
+                    glm::vec3 tmpPos = comp->GetRltPosition();
+                    ImGui::DragFloat3("Point Position", &tmpPos[0], 0.05f);
+                    comp->SetPosition(tmpPos);
+
+                    glm::vec3 tmpCol = comp->GetColor();
+                    ImGui::ColorPicker3("Point Color", &tmpCol[0], ImGuiColorEditFlags_PickerHueWheel);
+                    comp->SetColor(tmpCol);
+                    
+                }
+            }
+
+            if (selectedActor->GetMeshComponents().size() != 0)
+            {
+                for (auto comp : selectedActor->GetMeshComponents())
+                {
+                    ImGui::Text("Mesh Component");
+
+                    glm::vec3 tmpPos = comp->GetPosition();
+                    ImGui::DragFloat3("##Comp Position", &tmpPos[0], 0.05f);
+                    comp->SetPosition(tmpPos);
+                    ImGui::SameLine();
+                    ImGui::Text("Position");
+
+                    glm::vec3 tmpRot = comp->GetRotation();
+                    ImGui::DragFloat3("Comp Rotation", &tmpRot[0], 0.05f);
+                    comp->SetRotation(tmpRot);
+
+                    glm::vec3 tmpSca = comp->GetScale();
+                    ImGui::DragFloat3("Comp Scale", &tmpSca[0], 0.05f, 0.0f, 100.0f);
+                    comp->SetScale(tmpSca);
+
+                    glm::vec3 tmpCol = comp->GetMaterial()->GetColor();
+                    ImGui::ColorPicker3("Mat Color", &tmpCol[0], ImGuiColorEditFlags_PickerHueWheel);
+                    comp->GetMaterial()->SetColor(tmpCol);
+                }
+            }
         }
 
 

@@ -1,13 +1,13 @@
 #include "CameraActor.h"
 #include "Game.h"
 
-CameraActor::CameraActor(Game* game, const char* name)
+CameraActor::CameraActor(Game* game, const char* name, glm::vec3 position, glm::vec3 rotation, float fov, float near, float far, float moveSpeed, float mouseSpeed)
 	: Actor(game, name)
-	, mMoveSpeed(4.0f)
-	, mMouseSpeed(0.1f)
-	, mFov(glm::radians(60.0f))
-	, mNear(0.1f)
-	, mFar(100.0f)
+	, mMoveSpeed(moveSpeed)
+	, mMouseSpeed(mouseSpeed)
+	, mFov(fov)
+	, mNear(near)
+	, mFar(far)
 	, mIsOnCamera(false)
 	, mW(false)
 	, mS(false)
@@ -15,8 +15,9 @@ CameraActor::CameraActor(Game* game, const char* name)
 	, mA(false)
 	, mUp(glm::vec3(0.0f, 1.0f, 0.0f))
 {
-    mPosition = glm::vec3(1.0f, 3.0f, -3.0f);
-	mRotation.x = 0.0f;
+    mPosition = position;
+    mRotation = rotation;
+    mRotation.x = 0.0f;
 	mDirection = glm::vec3(
 		sin(mRotation.z) * cos(mRotation.y),
 		sin(mRotation.y),

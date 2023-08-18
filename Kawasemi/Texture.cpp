@@ -1,6 +1,7 @@
 #include "Texture.h"
 
-Texture::Texture(const char* path)
+Texture::Texture(std::string path)
+    : mPath(path)
 {
 	unsigned char header[54] = { 0 };
 	unsigned int dataPos;

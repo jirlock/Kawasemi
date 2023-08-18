@@ -5,7 +5,7 @@
 class CameraActor : public Actor
 {
 public:
-	CameraActor(class Game* game, const char* name);
+	CameraActor(class Game* game, const char* name, glm::vec3 position, glm::vec3 rotation, float fov, float near, float far, float moveSpeed, float mouseSpeed);
 	void ActorInput() override;
 	void UpdateActor(float deltaTime) override;
 	void UpdateDirection(float deltaTime);

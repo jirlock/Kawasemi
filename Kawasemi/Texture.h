@@ -12,10 +12,12 @@
 class Texture
 {
 public:
-	Texture(const char* path);
+	Texture(std::string path);
 	GLuint GetTextureID() { return mTextureID; }
+    std::string GetPath() { return mPath; }
 
 private:
+    std::string mPath;
 	GLuint mTextureID;
 
 };
